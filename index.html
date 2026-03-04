@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativus On Road | Institucional 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Cores Oficiais Extraídas do Estatuto */
+            --black: #0F0705;       /* Preto Oficial */
+            --red: #975D63;         /* Vermelho Escuro */
+            --red-bright: #c1757c;  
+            --tan: #C7A988;         /* Bege Areia */
+            --brown: #47352D;       /* Marrom Escuro */
+            --leather: #907159;     /* Marrom Couro */
+            --silver: #A9AAAD;      /* Prata Envelhecido */
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--black);
+            color: var(--tan);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* HEADER & NAV */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 7, 5, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(199, 169, 136, 0.1);
+        }
+
+        .logo { font-size: 1.2rem; font-weight: bold; color: var(--red); white-space: nowrap; }
+        .logo span { color: var(--silver); }
+        
+        nav { display: flex; gap: 15px; }
+        nav a {
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 700;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+        nav a:hover { color: var(--red); }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 100vh;
+            background: 
+                linear-gradient(to bottom, rgba(15,7,5,0.4), var(--black)),
+                url('imagens/hero_image.jpeg') center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 10vw, 6rem);
+            line-height: 1;
+            margin-bottom: 15px;
+            background: linear-gradient(to bottom, #fff, var(--tan));
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--silver);
+            font-size: clamp(0.85rem, 4vw, 1rem);
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+        }
+
+        /* SECTIONS */
+        section { padding: 60px 20px; max-width: 1200px; margin: auto; }
+        .section-header { margin-bottom: 35px; border-left: 4px solid var(--red); padding-left: 15px; }
+        section h2 { font-size: clamp(1.8rem, 8vw, 2.5rem); margin-bottom: 8px; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--glass);
+            padding: 30px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(199, 169, 136, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card:hover { transform: translateY(-5px); background: rgba(151, 93, 99, 0.08); }
+        .card i { font-size: 1.8rem; color: var(--red); }
+        .card h3 { font-size: 1.3rem; color: #fff; }
+        .card p { color: var(--silver); font-size: 0.9rem; }
+
+        /* BUTTONS */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding: 12px 24px;
+            background: var(--red);
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+            width: fit-content;
+        }
+
+        /* MUSIC CONTROL */
+        #music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .music-playing { animation: pulse-red 2s infinite; }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(151, 93, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0); }
+        }
+
+        footer {
+            padding: 50px 20px;
+            text-align: center;
+            background: #080403;
+            border-top: 1px solid rgba(199, 169, 136, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            header { flex-direction: column; gap: 8px; padding: 12px; }
+            nav { gap: 12px; }
+            .hero { padding-top: 100px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">NATIVUS <span>ON ROAD</span></div>
+    <nav>
+        <a href="#sobre">Sobre</a>
+        <a href="#regionais">Regionais</a>
+        <a href="eventos.html">Mural</a>
+        <a href="faq.html">FAQ</a> </nav>
+    </nav>
+</header>
+
+<div class="hero" id="home">
+    <div class="hero-content">
+        <h1>NATIVUS ON ROAD</h1>
+        <p>IRMANDADE • RESPEITO • ESTRADA • DISCIPLINA</p>
+    </div>
+</div>
+
+<section id="sobre">
+    <div class="section-header">
+        <h2>Quem somos</h2>
+        <p style="color: var(--silver)">Acima de tudo respeito e companheirismo</p>
+    </div>
+    <p style="font-size: 1rem; max-width: 850px; color: var(--silver);">
+        O <strong>Nativus On Road</strong> é um moto grupo sem fins lucrativos, fundamentado na irmandade, no respeito, na estrada e na disciplina. 
+        Nosso compromisso é com a lealdade e o apoio mútuo.
+        Baseamos nossa conduta no reconhecimento da hierarquia e na pilotagem segura, primando sempre pelo respeito aos costumes do meio motociclístico.
+    </p>
+</section>
+
+<section id="regionais" style="background: rgba(255,255,255,0.01)">
+    <div class="section-header">
+        <h2>Presença Regional</h2>
+        <p style="color: var(--silver)">Onde nos encontrar</p>
+    </div>
+    <div class="grid">
+        <div class="card">
+            <i class="fa-solid fa-location-dot"></i>
+            <h3>Pernambuco (PE)</h3>
+            <p>Chapter fundador com sede em Olinda/PE. Referência administrativa e histórica do grupo.</p>
+            <a href="regionais/pernambuco.html" class="button">Ver Regional</a>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <h3>Alagoas (AL)</h3>
+            <p>Regional estratégica em forte expansão e com presença massiva nos eventos.</p>
+            <a href="regionais/alagoas.html" class="button">Ver Regional</a>
+        </div>
+        <div class="card">
+            <i class="fa-solid fa-route"></i>
+            <h3>Bahia (BA)</h3>
+            <p>Regional em expansão, responsável pela manutenção da disciplina.</p>
+            <a href="regionais/bahia.html" class="button">Ver Regional</a>
+        </div>
+    </div>
+</section>
+
+<section id="cadastro" style="background: linear-gradient(to bottom, transparent, rgba(151,93,99,0.05)); text-align: center;">
+    <div class="section-header" style="border-left: none; padding-left: 0;">
+        <h2>Deseja nos conhecer?</h2>
+        <p style="color: var(--silver)">Inicie sua jornada nesta irmandade.</p>
+    </div>
+    <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto 30px; color: var(--silver);">
+        O ingresso no Nativus On Road <strong> exige lealdade, respeito à hierarquia e compromisso com os princípios do motogrupo.</strong>
+        <br>
+        <br>
+        Se você compartilha dos nossos valores, preencha sua candidatura para avaliação.
+    </p>
+    <a href="cadastro.html" class="button" style="padding: 18px 40px; font-size: 1rem;">Quero me Candidatar <i class="fa-solid fa-motorcycle"></i></a>
+</section>
+
+<section id="redes-sociais" style="background: rgba(255,255,255,0.01); text-align: center;">
+    <div class="section-header" style="border-left: none; padding-left: 0;">
+        <h2>Redes Sociais</h2>
+        <p style="color: var(--silver)">Acompanhe nossa jornada</p>
+    </div>
+    <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px;">
+        <a href="https://www.instagram.com/nativusonroad" target="_blank" style="display: flex; flex-direction: column; align-items: center; gap: 10px; text-decoration: none;;">
+            <i class="fa-brands fa-instagram" style="font-size: 3rem; color: var(--red);"></i>
+            <span style="color: var(--tan); font-weight: bold;">Instagram</span>
+        </a>
+    </div>
+</section>
+
+<footer>
+    <br>
+    <div class="social-links" style="margin-bottom: 20px;">
+        <a href="faq.html" class="button" style="padding: 18px 40px; font-size: 1rem;">Perguntas Frequentes (FAQ)</a>
+    </div>
+  
+    <br>
+    <br>
+    
+    <p>Produzido por YOHANTECH | 2026 | <a href="https://www.instagram.com/yohantech.br?igsh=enFqdXVka2x1c2dv" target="_blank" style="color: var(--red); text-decoration: none;"><i class="fa-brands fa-instagram"></i></a></p>
+    <a style="color: var(--tan); margin-left: 15px; font-size: 0.7rem; text-transform: uppercase;">Music: Metal Is Trash by Pufino | Source: freetouse.com </a>
+    </p>
+</footer>
+
+<audio id="bg-music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-control" onclick="toggleMusic()">
+    <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+</div>
+
+<script>
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    const btn = document.getElementById('music-control');
+    
+    // Configurações Iniciais
+    audio.volume = 0.7; 
+
+    // Recupera o estado salvo no navegador
+    const isPlaying = localStorage.getItem('nativus_music_playing') === 'true';
+    const savedTime = localStorage.getItem('nativus_music_time');
+
+    if (savedTime) {
+        audio.currentTime = parseFloat(savedTime);
+    }
+
+    // Se estava tocando, tenta retomar (respeitando bloqueio do navegador)
+    if (isPlaying) {
+        audio.play().then(() => {
+            updateUI(true);
+        }).catch(() => {
+            console.log("Aguardando interação do usuário para retomar áudio.");
+        });
+    }
+
+    // Salva o tempo atual da música a cada segundo
+    audio.ontimeupdate = () => {
+        localStorage.setItem('nativus_music_time', audio.currentTime);
+    };
+
+    function updateUI(playing) {
+        if (playing) {
+            icon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+            btn.classList.add('music-playing');
+        } else {
+            icon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+            btn.classList.remove('music-playing');
+        }
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            localStorage.setItem('nativus_music_playing', 'true');
+            updateUI(true);
+        } else {
+            audio.pause();
+            localStorage.setItem('nativus_music_playing', 'false');
+            updateUI(false);
+        }
+    }
+
+    // Reset de scroll
+    if (history.scrollRestoration) { history.scrollRestoration = 'manual'; }
+    window.scrollTo(0, 0);
+</script>
+
+</body>
+</html>

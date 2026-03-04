@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativus On Road | Perguntas Frequentes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black: #0F0705; --red: #975D63; --tan: #C7A988; --silver: #A9AAAD;
+            --brown: #47352D; --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--black); color: var(--tan); line-height: 1.6; }
+        h1, h2 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        header {
+            padding: 15px 5%;
+            background: rgba(15, 7, 5, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(199, 169, 136, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .back-link { color: var(--silver); text-decoration: none; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
+
+        section { padding: 60px 5%; max-width: 900px; margin: auto; }
+        .faq-header { text-align: center; margin-bottom: 50px; }
+        .faq-header h1 { font-size: 3rem; color: #fff; }
+
+        .faq-item {
+            background: var(--glass);
+            border: 1px solid rgba(199, 169, 136, 0.05);
+            margin-bottom: 15px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Oswald';
+            font-size: 1.1rem;
+            color: #fff;
+            transition: var(--transition);
+        }
+
+        .faq-question:hover { background: rgba(151, 93, 99, 0.1); }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease-out;
+            color: var(--silver);
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+            color: var(--red);
+        }
+
+        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background: var(--red); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; }
+        footer { text-align: center; padding: 40px; font-size: 0.7rem; color: #47352D; border-top: 1px solid rgba(199, 169, 136, 0.1); }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> VOLTAR PARA HOME</a>
+    <div style="color: var(--red); font-family: 'Oswald'; font-size: 1.2rem;">NATIVUS <span style="color: var(--silver)">FAQ</span></div>
+</header>
+
+<section>
+    <div class="faq-header">
+        <h1>Dúvidas Comuns</h1>
+        <p style="color: var(--silver)">Entenda como funciona o nosso MOTOGRUPO</p>
+    </div>
+
+    <div class="faq-list">
+        <div class="faq-item">
+            <div class="faq-question">O Nativus On Road é uma "gangue"? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Não. Somos um grupo de entusiastas do motociclismo focado em irmandade, viagens seguras e disciplina. Não temos qualquer envolvimento com atividades ilícitas e respeitamos rigorosamente as leis.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Preciso de uma moto específica para entrar? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Não exigimos marca ou modelo, mas a moto deve estar em perfeitas condições e ser capaz de manter um ritmo de viagem seguro em estradas e rodovias.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">O que é o "Período Probatório"? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">É um tempo de experiência (em torno de 90 dias) onde o candidato e o grupo se conhecem. Durante este período, avaliamos a sua conduta e adaptação às nossas regras.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Por que preciso de um "Padrinho"? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">O padrinho é um membro ativo que o introduz à cultura do grupo e se responsabiliza pela sua orientação inicial sobre normas de segurança e conduta.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Tenho que pagar algo para participar? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Como somos um grupo sem fins lucrativos, os membros contribuem com uma mensalidade para custear despesas administrativas, sociais e eventos do grupo.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Como funciona a hierarquia? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Seguimos uma estrutura organizada (Nacional e Regional). Os cargos existem para organizar as viagens e garantir que as regras de convivência sejam respeitadas por todos.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Quem decide o caminho nas viagens? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">O Road Captain lidera o comboio. Ele planeja a rota, as paradas para abastecimento e garante a segurança de todos os motociclistas durante o percurso.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">O grupo aceita qualquer pessoa? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Aceitamos pessoas que partilhem os nossos valores: Respeito, Disciplina e Companheirismo. Cada candidatura passa por uma análise criteriosa da diretoria.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">Posso levar a minha família nos eventos? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Sim! Valorizamos a família. Muitos dos nossos eventos são abertos a familiares, promovendo uma integração saudável entre todos os membros.</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">O que acontece se eu desrespeitar uma regra? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Possuímos um Código de Disciplina. Infrações são analisadas pela diretoria e podem resultar em advertências, suspensão ou desligamento, dependendo da gravidade.</div>
+        </div>
+    </div>
+</section>
+
+<footer>&copy; 2026 NATIVUS ON ROAD • RESPEITO E ESTRADA</footer>
+
+<audio id="bg-music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-control" onclick="toggleMusic()">
+    <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+</div>
+
+<script>
+    // Lógica do Accordion
+    document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', () => {
+            const parent = item.parentElement;
+            parent.classList.toggle('active');
+        });
+    });
+
+    // Sincronização de Música
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    const btn = document.getElementById('music-control');
+    audio.volume = 0.7; 
+    const isPlaying = localStorage.getItem('nativus_music_playing') === 'true';
+    const savedTime = localStorage.getItem('nativus_music_time');
+    if (savedTime) { audio.currentTime = parseFloat(savedTime); }
+    if (isPlaying) { audio.play().then(() => { updateUI(true); }).catch(() => {}); }
+    audio.ontimeupdate = () => { localStorage.setItem('nativus_music_time', audio.currentTime); };
+
+    function updateUI(playing) {
+        if (playing) {
+            icon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+            btn.classList.add('music-playing');
+        } else {
+            icon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+            btn.classList.remove('music-playing');
+        }
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play(); localStorage.setItem('nativus_music_playing', 'true'); updateUI(true);
+        } else {
+            audio.pause(); localStorage.setItem('nativus_music_playing', 'false'); updateUI(false);
+        }
+    }
+</script>
+</body>
+</html>

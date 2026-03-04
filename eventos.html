@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativus On Road | Mural de Ações</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black: #0F0705; --red: #975D63; --tan: #C7A988; --silver: #A9AAAD;
+            --brown: #47352D; --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--black); color: var(--tan); line-height: 1.6; }
+        h1, h2 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        header {
+            padding: 15px 5%;
+            background: rgba(15, 7, 5, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(199, 169, 136, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+
+        .back-link { color: var(--silver); text-decoration: none; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
+
+        section { padding: 60px 5%; max-width: 1200px; margin: auto; }
+        .page-header { text-align: center; margin-bottom: 60px; }
+        .page-header h1 { font-size: clamp(2rem, 8vw, 3.5rem); color: #fff; margin-bottom: 10px; }
+
+        .timeline-group {
+            margin-bottom: 60px;
+            border-left: 3px solid rgba(151, 93, 99, 0.3);
+            padding-left: 20px;
+        }
+
+        .year-marker {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            left: -20px;
+            box-shadow: 5px 5px 0px rgba(0,0,0,0.5);
+        }
+
+        .photo-mural {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .photo-item {
+            background: var(--glass);
+            padding: 10px;
+            border: 1px solid rgba(199, 169, 136, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .photo-item:hover { transform: translateY(-5px); border-color: var(--red); background: rgba(151, 93, 99, 0.05); }
+
+        .photo-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .photo-item:hover img { transform: scale(1.05); }
+
+        .photo-item figcaption {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--silver);
+            text-align: center;
+            font-style: italic;
+        }
+
+        /* LIGHTBOX / MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--tan);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal-close:hover { color: var(--red); }
+
+        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background: var(--red); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .music-playing { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(151, 93, 99, 0); } 100% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0); } }
+
+        footer { text-align: center; padding: 40px; font-size: 0.7rem; color: #47352D; border-top: 1px solid rgba(199, 169, 136, 0.1); }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> VOLTAR PARA HOME</a>
+    <div style="color: var(--red); font-family: 'Oswald'; font-size: 1.2rem;">NATIVUS <span style="color: var(--silver)">MURAL</span></div>
+</header>
+
+<section>
+    <div class="page-header">
+        <h1>Registros da Estrada</h1>
+        <p style="color: var(--silver)">Alguns momentos que marcaram nossa história.</p>
+        <a href="https://www.instagram.com/nativusonroad?igsh=cTlud3hpcG5hbGYz" target="_blank" style="color: var(--red); font-size: 0.9rem; text-decoration: none;">
+            <i class="fa-brands fa-instagram"></i> Acompanhe tudo em tempo real no nosso Instagram!
+        </a>
+    </div>
+
+    <div class="timeline-group">
+        <h2 class="year-marker">2026</h2>
+        <div class="photo-mural">
+            <figure class="photo-item" onclick="openModal('imagens/bahia_eventos.jpeg')">
+                <img src="imagens/bahia_eventos.jpeg" alt="14º Café da Manhã Família Brokk">
+                <figcaption>Regional Bahia em São Sbastião do Passé</figcaption>
+            </figure>
+            
+            <figure class="photo-item" onclick="openModal('imagens/alagoas_bahia.jpeg')">
+                <img src="imagens/alagoas_bahia.jpeg" alt="Moto Culto Kyrios">
+                <figcaption>Regionais Alagoas e Bahia no evento Serpentes de Aço</figcaption>
+            </figure>
+
+            <figure class="photo-item" onclick="openModal('imagens/motoculto_extremos.jpeg')">
+                <img src="imagens/motoculto_extremos.jpeg" alt="Moto Culto Extremos">
+                <figcaption>Motoculto Extremos MC</figcaption>
+            </figure>
+
+        </div>
+    </div>
+
+    <div class="timeline-group" style="border-color: rgba(151, 93, 99, 0.1);">
+        <h2 class="year-marker" style="background: var(--brown);">2025</h2>
+        <div class="photo-mural">
+            <figure class="photo-item" onclick="openModal('imagens/motoculto_ec_.jpeg')">
+                <img src="imagens/motoculto_ec_.jpeg" alt="Motoculto Esquadrão de Cristo">
+                <figcaption>Motoculto Esquadrão de Cristo Motoclube</figcaption>
+            </figure>
+
+            <figure class="photo-item" style="opacity: 0.7;" onclick="openModal('imagens/2025campina_grande2.jpeg')">
+                <img src="imagens/2025campina_grande2.jpeg" alt="Campina Grande MotoFest 2025">
+                <figcaption>Campina Grande MotoFest 2025</figcaption>
+            </figure>
+
+            <figure class="photo-item" style="opacity: 0.7;" onclick="openModal('imagens/nativus_piaui.jpeg')">
+                <img src="imagens/nativus_piaui.jpeg" alt="Nativus Piauí">
+                <figcaption>Nativus no Piauí</figcaption>
+            </figure>
+
+            <figure class="photo-item" style="opacity: 0.7;" onclick="openModal('imagens/2025_gusmaotrip3.jpeg')">
+                <img src="imagens/2025_gusmaotrip3.jpeg" alt="Campina Grande MotoFest 2025">
+                <figcaption>Registro de 2025</figcaption>
+            </figure>
+
+            <!-- CODIGO OMITIDO 
+            <figure class="photo-item" style="opacity: 0.7;" onclick="openModal('imagens/2025campina_grande2.jpeg')">
+                <img src="imagens/2025campina_grande2.jpeg" alt="Campina Grande MotoFest 2025">
+                <figcaption>Registro de 2025</figcaption>
+            </figure>
+
+            <figure class="photo-item" style="opacity: 0.7;" onclick="openModal('imagens/2025campina_grande2.jpeg')">
+                <img src="imagens/2025campina_grande2.jpeg" alt="Campina Grande MotoFest 2025">
+                <figcaption>Registro de 2025</figcaption>
+            </figure>
+            -->
+        </div>
+    </div>
+</section>
+
+<div id="myModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="imgExpanded">
+</div>
+
+<footer>&copy; 2026 NATIVUS ON ROAD • HISTÓRICO</footer>
+
+<audio id="bg-music" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+<div id="music-control" onclick="toggleMusic()"><i id="music-icon" class="fa-solid fa-volume-xmark"></i></div>
+
+<script>
+    /* LÓGICA DO MODAL */
+    function openModal(imgSrc) {
+        document.getElementById("myModal").style.display = "flex";
+        document.getElementById("imgExpanded").src = imgSrc;
+    }
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    /* SINCRONIZAÇÃO DE ÁUDIO */
+    const audio = document.getElementById('bg-music'); 
+    const icon = document.getElementById('music-icon'); 
+    const btn = document.getElementById('music-control'); 
+    audio.volume = 0.7; 
+    
+    const isPlaying = localStorage.getItem('nativus_music_playing') === 'true'; 
+    const savedTime = localStorage.getItem('nativus_music_time');
+    
+    if (savedTime) { audio.currentTime = parseFloat(savedTime); } 
+    if (isPlaying) { audio.play().then(() => { updateUI(true); }).catch(() => {}); }
+    
+    audio.ontimeupdate = () => { localStorage.setItem('nativus_music_time', audio.currentTime); };
+    
+    function updateUI(playing) { 
+        if (playing) { 
+            icon.classList.replace('fa-volume-xmark', 'fa-volume-high'); 
+            btn.classList.add('music-playing'); 
+        } else { 
+            icon.classList.replace('fa-volume-high', 'fa-volume-xmark'); 
+            btn.classList.remove('music-playing'); 
+        } 
+    }
+    
+    function toggleMusic() { 
+        if (audio.paused) { 
+            audio.play(); 
+            localStorage.setItem('nativus_music_playing', 'true'); 
+            updateUI(true); 
+        } else { 
+            audio.pause(); 
+            localStorage.setItem('nativus_music_playing', 'false'); 
+            updateUI(false); 
+        } 
+    }
+</script>
+
+</body>
+</html>

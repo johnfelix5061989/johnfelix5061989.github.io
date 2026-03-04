@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativus On Road | Candidatura</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black: #0F0705; /* Preto Oficial */
+            --red: #975D63;   /* Vermelho Escuro */
+            --tan: #C7A988;   /* Bege Areia */
+            --silver: #A9AAAD; /* Prata Envelhecido */
+            --brown: #47352D; /* Marrom Escuro */
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--black);
+            color: var(--tan);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        header {
+            padding: 15px 5%;
+            background: rgba(15, 7, 5, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(199, 169, 136, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .back-link { color: var(--silver); text-decoration: none; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; transition: var(--transition); }
+        .back-link:hover { color: var(--red); }
+
+        section { padding: 40px 5%; max-width: 800px; margin: auto; }
+        
+        .form-header { margin-bottom: 40px; text-align: center; }
+        .form-header h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
+        .form-header p { color: var(--silver); font-style: italic; }
+
+        form {
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(199, 169, 136, 0.1);
+        }
+
+        .form-section-title { 
+            font-family: 'Oswald'; 
+            color: var(--red); 
+            border-bottom: 1px solid var(--brown); 
+            margin-bottom: 20px; 
+            padding-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+        }
+
+        .form-group { margin-bottom: 25px; }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Oswald';
+            font-size: 0.9rem;
+            color: var(--tan);
+            text-transform: uppercase;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--brown);
+            border-radius: 4px;
+            color: #fff;
+            font-family: 'Roboto';
+            transition: var(--transition);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--red);
+            background: rgba(0,0,0,0.5);
+        }
+
+        .hidden-fields { 
+            display: none; 
+            margin-top: 20px; 
+            background: rgba(151, 93, 99, 0.05); 
+            padding: 20px; 
+            border-radius: 4px; 
+            border-left: 3px solid var(--red); 
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            font-family: 'Oswald';
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover { background: #b26c72; transform: scale(1.01); }
+
+        #music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+
+        .music-playing { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(151, 93, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0); }
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.7rem; color: var(--brown); }
+
+        @media (max-width: 600px) {
+            form { padding: 20px; }
+            header { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> VOLTAR PARA HOME</a>
+    <div style="color: var(--red); font-family: 'Oswald'; font-size: 1.2rem;">NATIVUS <span style="color: var(--silver)">ON ROAD</span></div>
+</header>
+
+<section>
+    <div class="form-header">
+        <h1>Pedido de Ingresso</h1>
+        <p>Inicie seu processo de avaliação conforme as normas da irmandade.</p>
+    </div>
+
+    <form action="https://formsubmit.co/nativusonroadmg@gmail.com" method="POST">
+    
+    <input type="hidden" name="_next" value="https://johnfelix5061989.github.io/nativus_site/obrigado.html">
+    <input type="hidden" name="_subject" value="Nova Candidatura: Nativus On Road">
+    <input type="hidden" name="_captcha" value="false">
+
+    <div class="form-section-title">Informações Pessoais</div>
+
+        <div class="form-group">
+            <label>Nome Completo</label>
+            <input type="text" name="nome" required>
+        </div>
+
+        <div class="form-group">
+            <label>Alcunha / Nome de Guerra</label>
+            <input type="text" name="alcunha" placeholder="Como gosta de ser chamado">
+        </div>
+
+        <div class="form-group">
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp (Com DDD)</label>
+            <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div class="form-group">
+            <label>Regional de Interesse</label>
+            <select name="regional" required>
+                <option value="">Selecione...</option>
+                <option value="PE">Pernambuco (Sede)</option>
+                <option value="AL">Alagoas</option>
+                <option value="BA">Bahia</option>
+            </select>
+        </div>
+
+        <div class="form-section-title">Experiência e Conduta</div>
+
+        <div class="form-group">
+            <label>Modelo e Cilindrada da Moto</label>
+            <input type="text" name="moto" placeholder="Ex: Horizon 250cc" required>
+        </div>
+
+        <div class="form-group">
+            <label>Já possui experiência com Moto Clubes ou Moto Grupos?</label>
+            <select name="experiencia_previa" id="exp_select" onchange="toggleExperienceFields()" required>
+                <option value="nao">Não</option>
+                <option value="sim">Sim</option>
+            </select>
+        </div>
+
+        <div id="experience_fields" class="hidden-fields">
+            <div class="form-group">
+                <label>Nome do Grupo anterior</label>
+                <input type="text" name="grupo_anterior">
+            </div>
+            <div class="form-group">
+                <label>Data de saída e Motivo do Desligamento</label>
+                <textarea name="motivo_saida" rows="3" placeholder="Informação sujeita a checagem disciplinar."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Referência no grupo anterior (Nome e Telefone)</label>
+                <input type="text" name="contato_referencia" placeholder="Contato para checagem de conduta">
+            </div>
+        </div>
+
+        <div class="form-section-title">Compromisso Hierárquico</div>
+
+        <div class="form-group">
+            <label>Nome do Padrinho (Membro Ativo Nativus On Road)</label>
+            <input type="text" name="padrinho" placeholder="Indicação obrigatória conforme Estatuto" required>
+        </div>
+
+        <div class="form-group">
+            <label>Por que deseja integrar a irmandade Nativus?</label>
+            <textarea name="motivo_ingresso" rows="4" placeholder="Fale sobre sua visão de Irmandade, Respeito, Estrada e Disciplina." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Enviar Candidatura para Avaliação</button>
+    </form>
+</section>
+
+<footer>
+    &copy; 2026 NATIVUS ON ROAD • PROCESSO DE ADMISSÃO
+</footer>
+
+<audio id="bg-music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-control" onclick="toggleMusic()">
+    <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+</div>
+
+<script>
+    // Lógica para mostrar/esconder campos de experiência prévia
+    function toggleExperienceFields() {
+        const select = document.getElementById('exp_select');
+        const fields = document.getElementById('experience_fields');
+        fields.style.display = (select.value === 'sim') ? 'block' : 'none';
+    }
+
+    // Sincronização de Música via localStorage
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    const btn = document.getElementById('music-control');
+    
+    audio.volume = 0.7; 
+
+    const isPlaying = localStorage.getItem('nativus_music_playing') === 'true';
+    const savedTime = localStorage.getItem('nativus_music_time');
+
+    if (savedTime) { audio.currentTime = parseFloat(savedTime); }
+
+    if (isPlaying) {
+        audio.play().then(() => { updateUI(true); }).catch(() => {
+            console.log("Interação necessária para iniciar áudio.");
+        });
+    }
+
+    audio.ontimeupdate = () => { localStorage.setItem('nativus_music_time', audio.currentTime); };
+
+    function updateUI(playing) {
+        if (playing) {
+            icon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+            btn.classList.add('music-playing');
+        } else {
+            icon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+            btn.classList.remove('music-playing');
+        }
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            localStorage.setItem('nativus_music_playing', 'true');
+            updateUI(true);
+        } else {
+            audio.pause();
+            localStorage.setItem('nativus_music_playing', 'false');
+            updateUI(false);
+        }
+    }
+</script>
+
+</body>
+</html>

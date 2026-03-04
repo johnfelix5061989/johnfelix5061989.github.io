@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativus On Road | Candidatura Enviada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --black: #0F0705; /* Preto Oficial */
+            --red: #975D63;   /* Vermelho Escuro */
+            --tan: #C7A988;   /* Bege Areia */
+            --silver: #A9AAAD; /* Prata Envelhecido */
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--black);
+            color: var(--tan);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+
+        header {
+            padding: 15px 5%;
+            background: rgba(15, 7, 5, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(199, 169, 136, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link { color: var(--silver); text-decoration: none; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
+
+        section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .success-box {
+            background: var(--glass);
+            padding: 60px 40px;
+            border-radius: 8px;
+            border: 1px solid rgba(199, 169, 136, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .success-box i {
+            font-size: 4rem;
+            color: var(--red);
+            margin-bottom: 25px;
+        }
+
+        .success-box h1 { font-size: 2.5rem; color: #fff; margin-bottom: 20px; }
+        .success-box p { color: var(--silver); font-size: 1.1rem; margin-bottom: 30px; }
+
+        .home-btn {
+            display: inline-block;
+            padding: 15px 35px;
+            background: var(--red);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Oswald';
+            font-size: 1rem;
+            text-transform: uppercase;
+            clip-path: polygon(5% 0, 100% 0, 95% 100%, 0% 100%);
+            transition: var(--transition);
+        }
+
+        .home-btn:hover { background: #b26c72; transform: scale(1.05); }
+
+        #music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 2000;
+        }
+
+        .music-playing { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(151, 93, 99, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0); }
+        }
+
+        footer { text-align: center; padding: 40px; font-size: 0.7rem; color: #47352D; }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> VOLTAR PARA HOME</a>
+    <div style="color: var(--red); font-family: 'Oswald'; font-size: 1.2rem;">NATIVUS <span style="color: var(--silver)">ON ROAD</span></div>
+</header>
+
+<section>
+    <div class="success-box">
+        <i class="fa-solid fa-circle-check"></i>
+        <h1>Candidatura Enviada</h1>
+        <p>
+            Obrigado pelo seu interesse em integrar o Nativus On Road. 
+            <br>
+            <br>
+            O seu pedido será agora avaliado pela Diretoria Regional e, posteriormente, homologado pela Administração Nacional.
+        </p>
+        <p style="font-size: 0.95rem; font-style: italic; opacity: 0.8;">Aguarde o nosso contacto via WhatsApp.</p>
+        <a href="index.html" class="home-btn">Voltar ao Início</a>
+    </div>
+</section>
+
+<footer>
+    &copy; 2026 NATIVUS ON ROAD • RESPEITO E DISCIPLINA
+</footer>
+
+<audio id="bg-music" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-control" onclick="toggleMusic()">
+    <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+</div>
+
+<script>
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    const btn = document.getElementById('music-control');
+    audio.volume = 0.7; 
+
+    const isPlaying = localStorage.getItem('nativus_music_playing') === 'true';
+    const savedTime = localStorage.getItem('nativus_music_time');
+    if (savedTime) { audio.currentTime = parseFloat(savedTime); }
+
+    if (isPlaying) {
+        audio.play().then(() => { updateUI(true); }).catch(() => {});
+    }
+
+    audio.ontimeupdate = () => { localStorage.setItem('nativus_music_time', audio.currentTime); };
+
+    function updateUI(playing) {
+        if (playing) {
+            icon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+            btn.classList.add('music-playing');
+        } else {
+            icon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+            btn.classList.remove('music-playing');
+        }
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            localStorage.setItem('nativus_music_playing', 'true');
+            updateUI(true);
+        } else {
+            audio.pause();
+            localStorage.setItem('nativus_music_playing', 'false');
+            updateUI(false);
+        }
+    }
+</script>
+
+</body>
+</html>
