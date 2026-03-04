@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Nativus On Road | Alagoas 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --black: #0F0705; --red: #975D63; --tan: #C7A988; --silver: #A9AAAD;
+            --brown: #47352D; --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Roboto', sans-serif; background-color: var(--black); color: var(--tan); line-height: 1.6; overflow-x: hidden; }
+        h1, h2, h3 { font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        
+        header { padding: 15px 5%; background: rgba(15, 7, 5, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(199, 169, 136, 0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; }
+        .back-link { color: var(--silver); text-decoration: none; font-weight: bold; font-size: 0.8rem; display: flex; align-items: center; gap: 8px; }
+        
+        section { padding: 40px 5%; max-width: 1200px; margin: auto; }
+        
+        .release-box { margin-bottom: 60px; }
+        .release-box h1 { font-size: clamp(1.8rem, 8vw, 3.2rem); color: #fff; margin-bottom: 20px; border-left: 5px solid var(--red); padding-left: 20px; }
+        .release-box p { color: var(--silver); font-size: 1.1rem; max-width: 850px; margin-bottom: 15px; }
+
+        /* GALERIA COM DIAGRAMAÇÃO E LIGHTBOX */
+        .gallery { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 80px; 
+        }
+        .gallery-item { 
+            background: var(--glass); 
+            border: 1px solid rgba(199, 169, 136, 0.1); 
+            border-radius: 4px; 
+            padding: 10px; 
+            transition: var(--transition);
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .gallery-item:hover { transform: translateY(-5px); border-color: var(--red); background: rgba(151, 93, 99, 0.05); }
+        
+        .img-container {
+            width: 100%;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #000;
+            border-radius: 2px;
+        }
+        .gallery-item img { 
+            max-width: 100%; 
+            max-height: 100%; 
+            object-fit: contain; /* Foto inteira sem cortes */
+            transition: var(--transition);
+        }
+        .gallery-item:hover img { transform: scale(1.05); }
+        
+        .gallery-item figcaption { margin-top: 12px; font-size: 0.8rem; color: var(--tan); text-align: center; font-weight: 700; text-transform: uppercase; border-top: 1px solid rgba(151, 93, 99, 0.2); padding-top: 8px; }
+
+        /* ESTRUTURA DO MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border: 2px solid var(--tan);
+            box-shadow: 0 0 30px rgba(0,0,0,0.5);
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* ORGANOGRAMA */
+        .organogram { text-align: center; padding: 40px 20px; background: var(--glass); border-radius: 8px; border: 1px solid rgba(199, 169, 136, 0.05); }
+        .org-container { display: flex; flex-direction: column; align-items: center; gap: 30px; }
+        .org-node { background: var(--brown); border: 1px solid var(--red); padding: 20px; min-width: 240px; position: relative; }
+        .org-node::after { content: ""; position: absolute; bottom: -30px; left: 50%; width: 2px; height: 30px; background: var(--red); }
+        .org-node.last::after { display: none; }
+        .org-node h4 { color: #fff; font-size: 0.95rem; margin-bottom: 5px; }
+        .org-node span { font-size: 0.8rem; color: var(--silver); }
+        
+        footer { text-align: center; padding: 60px 20px; border-top: 1px solid rgba(199, 169, 136, 0.1); font-size: 0.75rem; color: var(--silver); opacity: 0.6; }
+        
+        #music-control { position: fixed; bottom: 25px; right: 25px; width: 50px; height: 50px; background: var(--red); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border: 2px solid rgba(255,255,255,0.2); }
+        .music-playing { animation: pulse-red 2s infinite; }
+        @keyframes pulse-red { 0% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(151, 93, 99, 0); } 100% { box-shadow: 0 0 0 0 rgba(151, 93, 99, 0); } }
+    </style>
+</head>
+<body>
+
+<header>
+    <a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> VOLTAR PARA HOME</a>
+    <div style="color: var(--red); font-family: 'Oswald'; font-size: 1.2rem;">NATIVUS <span style="color: var(--silver)">AL</span></div>
+</header>
+
+<section>
+    <div class="release-box">
+        <h1>Regional Alagoas</h1>
+        <p>A Regional Alagoas consolidou-se como um ponto estratégico de expansão do Nativus On Road. Pautada pelo respeito à hierarquia nacional, nossa regional destaca-se pela forte integração em eventos motociclísticos e pela lealdade absoluta aos princípios de irmandade, respeito, estrada e disciplina.</p>
+        <p>Nosso objetivo é fortalecer o vínculo entre os membros locais, garantindo que a identidade visual e os costumes da estrada sejam preservados com disciplina.</p>
+    </div>
+
+    <div class="gallery">
+        <figure class="gallery-item" onclick="openModal('../imagens/dias.jpeg')">
+            <div class="img-container">
+                <img src="../imagens/dias.jpeg" alt="Diretor Alagoas">
+            </div>
+            <figcaption>Diretor Regional AL<br>P. Dias</figcaption>
+        </figure>
+
+        <figure class="gallery-item" onclick="openModal('../imagens/cler_membro_ba.jpeg')">
+            <div class="img-container">
+                <img src="../imagens/cler_membro_ba.jpeg" alt="Membro Alagoas">
+            </div>
+            <figcaption>Membro - Regional AL<br>Cler</figcaption>
+        </figure>
+    </div>
+
+    <div style="margin-bottom: 40px; border-left: 4px solid var(--red); padding-left: 15px;">
+        <h2>Estrutura Regional Alagoas</h2>
+        <p style="color: var(--silver)">Hierarquia Estadual Conforme Estatuto</p>
+    </div>
+
+    <div class="organogram">
+        <div class="org-container">
+            <div class="org-node">
+                <h4>DIRETORIA ESTADUAL (AL)</h4>
+                <span>Atualmente, é o <strong>diretor de todas as regionais</strong></span>
+            </div>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+                <div class="org-node">
+                    <h4>REGIONAL AL</h4>
+                    <span>Sob liderança do Diretor AL</span>
+                </div>
+                <div class="org-node last">
+                    <h4> REGIONAL BA</h4>
+                    <span>Sob liderança do Diretor AL</span>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<div id="myModal" class="modal" onclick="closeModal()">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="img01">
+</div>
+
+<footer>&copy; 2026 NATIVUS ON ROAD • REGIONAL ALAGOAS</footer>
+
+<audio id="bg-music" loop>
+    <source src="../musica.mp3" type="audio/mpeg">
+</audio>
+
+<div id="music-control" onclick="toggleMusic()">
+    <i id="music-icon" class="fa-solid fa-volume-xmark"></i>
+</div>
+
+<script>
+    /* MODAL LOGIC */
+    function openModal(imgSrc) {
+        document.getElementById("myModal").style.display = "flex";
+        document.getElementById("img01").src = imgSrc;
+    }
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    /* MUSIC SYNC LOGIC */
+    const audio = document.getElementById('bg-music');
+    const icon = document.getElementById('music-icon');
+    const btn = document.getElementById('music-control');
+    audio.volume = 0.7; 
+
+    const isPlaying = localStorage.getItem('nativus_music_playing') === 'true';
+    const savedTime = localStorage.getItem('nativus_music_time');
+    if (savedTime) { audio.currentTime = parseFloat(savedTime); }
+
+    if (isPlaying) {
+        audio.play().then(() => { updateUI(true); }).catch(() => {});
+    }
+
+    audio.ontimeupdate = () => { localStorage.setItem('nativus_music_time', audio.currentTime); };
+
+    function updateUI(playing) {
+        if (playing) {
+            icon.classList.replace('fa-volume-xmark', 'fa-volume-high');
+            btn.classList.add('music-playing');
+        } else {
+            icon.classList.replace('fa-volume-high', 'fa-volume-xmark');
+            btn.classList.remove('music-playing');
+        }
+    }
+
+    function toggleMusic() {
+        if (audio.paused) {
+            audio.play();
+            localStorage.setItem('nativus_music_playing', 'true');
+            updateUI(true);
+        } else {
+            audio.pause();
+            localStorage.setItem('nativus_music_playing', 'false');
+            updateUI(false);
+        }
+    }
+</script>
+</body>
+</html>
