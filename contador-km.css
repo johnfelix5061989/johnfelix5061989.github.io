@@ -1,0 +1,334 @@
+/* ============================================================
+   CONTADOR DE QUILOMETRAGEM — NATIVUS ON ROAD
+   Pop-up institucional (arquivo isolado)
+   O index.html apenas referencia este arquivo.
+   Paleta oficial do Estatuto:
+   preto #0F0705 | vermelho #975D63 / #c1757c | bege #C7A988
+   couro #907159 | marrom #47352D | prata #A9AAAD
+   ============================================================ */
+
+/* ---------- OVERLAY ---------- */
+.km-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    background: rgba(8, 4, 3, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+.km-overlay[hidden] { display: none; }
+.km-overlay.km-open { opacity: 1; }
+
+/* ---------- MODAL ---------- */
+.km-modal {
+    position: relative;
+    width: min(920px, 94vw);
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #47352d transparent;
+    background: linear-gradient(180deg, rgba(28,16,12,0.97), rgba(15,7,5,0.98));
+    border: 1px solid rgba(199,169,136,0.18);
+    border-radius: 18px;
+    box-shadow: 0 40px 90px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    padding: 26px 30px 22px;
+    transform: translateY(26px) scale(0.96);
+    transition: transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.km-overlay.km-open .km-modal { transform: none; }
+
+/* hero institucional ao fundo (bem sutil) */
+.km-modal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: url('imagens/hero_image.jpeg') center center / cover no-repeat;
+    opacity: 0.12;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), transparent 65%);
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.9), transparent 65%);
+}
+/* faixa vermelha superior */
+.km-modal::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 26px;
+    right: 26px;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #c1757c, transparent);
+    opacity: 0.8;
+    pointer-events: none;
+}
+.km-modal > * { position: relative; }
+
+/* ---------- BOTÃO FECHAR ---------- */
+.km-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(199,169,136,0.08);
+    color: #C7A988;
+    border: 1px solid rgba(199,169,136,0.25);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.25s ease;
+}
+.km-close:hover {
+    background: #975D63;
+    color: #fff;
+    transform: rotate(90deg);
+}
+
+/* ---------- CABEÇALHO ---------- */
+.km-head {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 18px;
+    padding-right: 48px;
+}
+.km-logo {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    flex: 0 0 auto;
+    filter: drop-shadow(0 4px 14px rgba(0,0,0,0.6));
+}
+.km-titles h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: clamp(1.25rem, 4vw, 1.9rem);
+    color: #EBDCC2;
+    margin: 0;
+    line-height: 1.15;
+}
+.km-titles h2 b { color: #c1757c; }
+.km-titles p {
+    margin: 5px 0 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #A9AAAD;
+}
+
+/* ---------- CORPO ---------- */
+.km-body {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+}
+.km-globe { flex: 0 0 auto; width: clamp(230px, 34%, 330px); }
+.km-globe svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+.km-panel { flex: 1 1 320px; min-width: 260px; }
+
+.km-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #A9AAAD;
+}
+.km-label i { color: #c1757c; }
+
+/* ---------- ODÔMETRO DIGITAL ---------- */
+.km-odometer {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin: 13px 0 7px;
+    padding: 13px 16px 12px;
+    background: linear-gradient(180deg, #221410, #0d0806 45%, #120b08 75%, #1c120c);
+    border: 1px solid rgba(199,169,136,0.22);
+    border-radius: 10px;
+    box-shadow: inset 0 3px 10px rgba(0,0,0,0.75),
+                inset 0 -1px 0 rgba(255,255,255,0.05),
+                0 6px 18px rgba(0,0,0,0.45);
+}
+.km-slot {
+    position: relative;
+    width: 0.68em;
+    height: 1em;
+    overflow: hidden;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2rem, 6vw, 3rem);
+    color: #EBDCC2;
+    background: linear-gradient(180deg, #241612, #0f0907 55%, #1b110c);
+    border-radius: 5px;
+    box-shadow: inset 0 0 0 1px rgba(199,169,136,0.14),
+                inset 0 8px 12px rgba(0,0,0,0.65);
+}
+/* dígito digital: sempre um número completo, nunca meio virado */
+.km-digit {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    will-change: transform;
+}
+.km-digit.km-dim { opacity: 0.28; } /* zeros à esquerda, apagadinhos */
+.km-digit.km-flip { animation: kmFlip 0.15s ease-out; }
+@keyframes kmFlip {
+    from { transform: translateY(-100%); opacity: 0.2; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.km-sep {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 4.8vw, 2.4rem);
+    color: #A9AAAD;
+    opacity: 0.7;
+    align-self: center;
+    padding-top: 0.1em;
+}
+.km-unit {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #c1757c;
+    letter-spacing: 2px;
+    align-self: flex-end;
+    margin-left: 6px;
+}
+.km-sub {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.66rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #A9AAAD;
+    opacity: 0.85;
+    margin-bottom: 14px;
+}
+
+/* ---------- CHIPS / RODAPÉ ---------- */
+.km-stats { display: flex; flex-wrap: wrap; gap: 9px; }
+.km-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.75rem;
+    color: #A9AAAD;
+    padding: 6px 13px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid rgba(199,169,136,0.14);
+    transition: all 0.25s ease;
+}
+.km-chip:hover { background: rgba(151,93,99,0.14); transform: translateY(-2px); }
+.km-chip i { color: #c1757c; font-size: 0.8rem; }
+.km-chip b { color: #C7A988; font-variant-numeric: tabular-nums; }
+
+.km-hint {
+    margin-top: 13px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #A9AAAD;
+    opacity: 0.6;
+}
+.km-hint i { color: #C7A988; }
+
+.km-foot {
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(199,169,136,0.12);
+    text-align: center;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.62rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #A9AAAD;
+    opacity: 0.55;
+}
+
+.km-sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+    white-space: nowrap;
+}
+
+/* ---------- ANIMAÇÕES DO SVG ---------- */
+.km-star { animation: kmTwinkle 3.4s ease-in-out infinite alternate; }
+@keyframes kmTwinkle { from { opacity: 0.12; } to { opacity: 0.9; } }
+
+.km-road { animation: kmMarch 5s linear infinite; }
+@keyframes kmMarch { to { stroke-dashoffset: -240; } }
+
+.km-spokes {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: kmSpin 0.6s linear infinite;
+}
+.km-svg.km-boost .km-spokes { animation-duration: 0.22s; }
+@keyframes kmSpin { to { transform: rotate(360deg); } }
+
+.km-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: kmPing 2.8s cubic-bezier(0.2, 0.7, 0.3, 1) infinite;
+}
+@keyframes kmPing {
+    0% { transform: scale(0.25); opacity: 0.9; }
+    75%, 100% { transform: scale(2.1); opacity: 0; }
+}
+
+/* ---------- RESPONSIVO ---------- */
+@media (max-width: 640px) {
+    .km-modal { padding: 20px 16px 18px; }
+    .km-head { gap: 12px; }
+    .km-logo { width: 52px; height: 52px; }
+    .km-body { flex-direction: column; gap: 6px; }
+    .km-globe { width: clamp(190px, 64vw, 260px); }
+    .km-panel { width: 100%; text-align: center; }
+    .km-label, .km-stats, .km-hint { justify-content: center; }
+    .km-foot { letter-spacing: 2.5px; }
+}
+
+/* ---------- ACESSIBILIDADE ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .km-star, .km-road, .km-spokes, .km-ring { animation: none !important; }
+    .km-digit.km-flip { animation: none !important; }
+    .km-overlay, .km-modal, .km-close, .km-chip { transition: none !important; }
+}
